@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 1rem;
+}
+
+.select-file-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.column p {
+  margin: 0;
+  padding: 0;
+}
+
+.file-column-left {
+  border-right: 1px solid grey;
+  padding: 1rem;
+}
+
+.file-column-right {
+  border-left: 1px solid grey;
+  padding: 1rem;
+}
