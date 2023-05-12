@@ -12,7 +12,7 @@ const useStyles = createStyles({
 
 export default function NotificationsDrawer() {
   const { classes } = useStyles();
-  const { notificationsDrawer, setNotificationsDrawer } = useAppContext();
+  const { notificationsDrawer, toggleDrawer } = useAppContext();
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function NotificationsDrawer() {
         position="right"
         size="xs"
         opened={notificationsDrawer}
-        onClose={setNotificationsDrawer.close}
+        onClose={() => toggleDrawer("right")}
       >
         <Drawer.Overlay />
         <Drawer.Content>

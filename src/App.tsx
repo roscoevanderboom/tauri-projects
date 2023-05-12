@@ -1,54 +1,45 @@
-import { MantineProvider } from "@mantine/core";
+import { ColorScheme } from "@mantine/core";
 import { Outlet, useOutletContext } from "react-router-dom";
-import { useDisclosure, useLocalStorage } from "@mantine/hooks";
-import { InitialState } from "./data/interfaces";
-// import { useEffect, useState } from "react";
+import { useLocalStorage } from "@mantine/hooks";
+import { DeepPartial, InitialState } from "./data/interfaces";
+import { useReducer } from "react";
+import reducer, { reducer_types } from "./context/reducer";
+import initialState from "./context/inintialState";
+import StyleProvider from "./providers/StylesProvider";
 
 export default function App() {
-  const [drawer, setDrawer] = useDisclosure(false);
-  const [notificationsDrawer, setNotificationsDrawer] = useDisclosure(false);
+  const [state, setState] = useReducer(reducer, initialState);
+  const [colorScheme, setUserTheme] = useLocalStorage<DeepPartial<ColorScheme>>(
+    {
+      key: "theme",
+      defaultValue: "light",
+    }
+  );
 
-  const [userTheme, setUserTheme] = useLocalStorage({
-    key: "theme",
-    defaultValue: {
-      buttons: "green",
-      theme: false,
-    },
-  });
+  const dispatch = (type: string, payload: any) => {
+    setState({ type, payload });
+  };
 
-  // Update storedStyles with new values
-  const updateTheme = (prop: string, value: string | boolean) => {
-    const newStyles = { ...userTheme, [prop]: value };
-    setUserTheme(newStyles);
+  const toggleTheme = () => {
+    setUserTheme(colorScheme === "light" ? "dark" : "light");
+  };
+
+  const toggleDrawer = (type: "left" | "right") => {
+    switch (type) {
+      case "left":
+        return dispatch(reducer_types.SET_DRAWER, !state.drawer);
+      case "right":
+        return dispatch(
+          reducer_types.SET_NOTIFICATIONS_DRAWER,
+          !state.notificationsDrawer
+        );
+    }
   };
 
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        colorScheme: userTheme.theme ? "light" : "dark",
-        components: {
-          Button: {
-            defaultProps: {
-              size: "sm",
-              color: userTheme.buttons,
-            },
-          },
-        },
-      }}
-    >
-      <Outlet
-        context={{
-          drawer,
-          setDrawer,
-          notificationsDrawer,
-          setNotificationsDrawer,
-          userTheme,
-          updateTheme,
-        }}
-      />
-    </MantineProvider>
+    <StyleProvider colorScheme={colorScheme}>
+      <Outlet context={{ ...state, dispatch, toggleTheme, toggleDrawer }} />
+    </StyleProvider>
   );
 }
 

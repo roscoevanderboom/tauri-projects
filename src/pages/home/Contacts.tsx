@@ -9,7 +9,6 @@ import {
   Center,
   TextInput,
   rem,
-  Container,
 } from "@mantine/core";
 import { keys } from "@mantine/utils";
 import {
@@ -18,6 +17,7 @@ import {
   IconChevronUp,
   IconSearch,
 } from "@tabler/icons-react";
+import MainPageContainer from "@/components/Containers/MainPageContainer";
 
 const useStyles = createStyles((theme) => ({
   th: {
@@ -35,7 +35,6 @@ const useStyles = createStyles((theme) => ({
           : theme.colors.gray[0],
     },
   },
-
   icon: {
     width: rem(21),
     height: rem(21),
@@ -142,13 +141,13 @@ export default function Contacts({ data }: TableSortProps) {
   ));
 
   return (
-    <Container mt={25}>
-      <ScrollArea>
+    <MainPageContainer>
+      <ScrollArea p={20}>
         <TextInput
-          placeholder="Search by any field"
           mb="md"
-          icon={<IconSearch size="0.9rem" stroke={1.5} />}
           value={search}
+          placeholder="Search by any field"
+          icon={<IconSearch size="0.9rem" stroke={1.5} />}
           onChange={handleSearchChange}
         />
         <Table
@@ -197,6 +196,6 @@ export default function Contacts({ data }: TableSortProps) {
           </tbody>
         </Table>
       </ScrollArea>
-    </Container>
+    </MainPageContainer>
   );
 }

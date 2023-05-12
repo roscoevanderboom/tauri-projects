@@ -64,7 +64,7 @@ const useStyles = createStyles((theme) => ({
 
 export default function AppHeader() {
   const { classes } = useStyles();
-  const { drawer, setDrawer, setNotificationsDrawer } = useAppContext();
+  const { drawer, toggleDrawer } = useAppContext();
 
   const items = routes.map((link) => (
     <Text
@@ -81,7 +81,7 @@ export default function AppHeader() {
     <Header height={56} className={classes.header}>
       <div className={classes.inner}>
         <Group>
-          <Burger opened={drawer} onClick={setDrawer.toggle} size="sm" />
+          <Burger opened={drawer} onClick={() => toggleDrawer("left")} size="sm" />
           <MantineLogo size={28} />
         </Group>
 
@@ -104,7 +104,7 @@ export default function AppHeader() {
               "Blitz.js",
             ]}
           />
-          <UnstyledButton  onClick={setNotificationsDrawer.toggle} >
+          <UnstyledButton  onClick={() => toggleDrawer("right")} >
             <IconNotification />
           </UnstyledButton>
         </Group>

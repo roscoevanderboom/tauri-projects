@@ -6,6 +6,7 @@ import {
   Center,
   Group,
   rem,
+  useMantineTheme,
 } from "@mantine/core";
 import { upperFirst } from "@mantine/hooks";
 import { IconMoon, IconSun } from "@tabler/icons-react";
@@ -44,19 +45,19 @@ const useStyles = createStyles((theme) => ({
 
 export default function ThemeColorToggle() {
   const { classes } = useStyles();
-  const { userTheme, updateTheme } = useAppContext();
-  const Icon = !userTheme.theme ? IconSun : IconMoon;
+  const { colorScheme } = useMantineTheme();
+  const { toggleTheme } = useAppContext();
+  const Icon = colorScheme === "dark" ? IconSun : IconMoon;
 
   return (
     <Group position="center" my="xl">
       <UnstyledButton
         aria-label="Toggle theme"
         className={classes.control}
-        onClick={() => updateTheme("theme", !userTheme.theme)}
-        title="Ctrl + J"
+        onClick={toggleTheme}
       >
         <Text size="sm" className={classes.value}>
-          {upperFirst(userTheme.theme ? "dark" : "light")} theme
+          {upperFirst(colorScheme === "light" ? "dark" : "light")} theme
         </Text>
 
         <Center className={classes.iconWrapper}>

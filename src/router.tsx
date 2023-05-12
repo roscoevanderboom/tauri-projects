@@ -1,18 +1,13 @@
 import { createMemoryRouter } from "react-router-dom";
 import App from "./App";
-import Dashboard from "./pages/Dashboard";
-import Contacts from "./pages/Contacts";
-import {
-  IconGauge,
-  IconAdjustments,
-  IconFileDatabase,
-} from "@tabler/icons-react";
-import Home from "./pages/Home";
-import FileBrowser from "./pages/FileBrowser";
+import Dashboard from "./pages/home/Dashboard";
+import { IconGauge, IconAdjustments } from "@tabler/icons-react";
+import Home from "./pages/home";
 import SignIn from "./pages/SignIn";
 import LandingPage from "./pages/LandingPage";
 import { tableData } from "./data/constants/mockData";
 import Page404 from "./pages/404";
+import Contacts from "./pages/home/Contacts";
 
 export const routes = [
   {
@@ -20,12 +15,6 @@ export const routes = [
     icon: IconGauge,
     element: <Dashboard />,
     path: "/home/dashboard",
-  },
-  {
-    label: "File Browser",
-    icon: IconFileDatabase,
-    element: <FileBrowser />,
-    path: "/home/file-browser",
   },
   {
     label: "Contacts",
