@@ -13,7 +13,7 @@ export const handleWindow = async (action: string) => {
       appWindow.maximize();
       break;
     default:
-      await appWindow.hide();
+      await appWindow.close();
       break;
   }
 };
