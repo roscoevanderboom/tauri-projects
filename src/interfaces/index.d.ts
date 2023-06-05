@@ -1,9 +1,11 @@
 
 export interface InitialState {
+  loading: boolean;
   drawer: boolean;
-  dispatch: (_t: string, _p: any) => void,
-  toggleTheme: () => void;
+  toggleLoading: (val: boolean) => void;
   toggleDrawer: () => void;
+  toggleTheme: () => void;
+  dispatch: (_t: string, _p: any) => void,
 }
 
 export type Dispatch = (type: string, payload: any) => void;

@@ -2,7 +2,8 @@
 import { Outlet, useOutletContext } from "react-router-dom";
 import { useLocalStorage } from "@mantine/hooks";
 import { useReducer } from "react";
-import { ColorScheme } from "@mantine/core";
+import { ColorScheme, LoadingOverlay } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import StylesProvider from "./providers/StylesProvider";
 // Context
 import initialState from "./context/inintialState";
@@ -31,9 +32,23 @@ export default function App() {
     dispatch(reducer_types.SET_DRAWER, !state.drawer);
   };
 
+  const toggleLoading = (val: boolean) => {
+    dispatch(reducer_types.SET_LOADING, val);
+  };
+
   return (
     <StylesProvider colorScheme={colorScheme}>
-      <Outlet context={{ ...state, dispatch, toggleTheme, toggleDrawer }} />
+      <Notifications autoClose={3000} />
+      <LoadingOverlay zIndex={1000} overlayBlur={2} visible={state.loading} />
+      <Outlet
+        context={{
+          ...state,
+          dispatch,
+          toggleLoading,
+          toggleTheme,
+          toggleDrawer,
+        }}
+      />
     </StylesProvider>
   );
 }
