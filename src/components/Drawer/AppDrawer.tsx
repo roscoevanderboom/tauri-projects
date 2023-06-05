@@ -1,29 +1,15 @@
 import { useAppContext } from "@/App";
-import { Drawer, createStyles } from "@mantine/core";
-
-const useStyles = createStyles({
-  header: {
-    backgroundColor: "#339AF0",
-  },
-  drawer: {
-    padding: 0,
-  },
-});
+import { Drawer } from "@mantine/core";
 
 export default function AppDrawer() {
-  const { classes } = useStyles();
   const { drawer, toggleDrawer } = useAppContext();
 
   return (
     <>
-      <Drawer.Root
-        size="xs"
-        opened={drawer}
-        onClose={() => toggleDrawer()}
-      >
+      <Drawer.Root size="xs" opened={drawer} onClose={() => toggleDrawer()}>
         <Drawer.Overlay />
         <Drawer.Content>
-          <Drawer.Header className={classes.header}>
+          <Drawer.Header mb={24} sx={{ backgroundColor: "teal" }}>
             <Drawer.Title>Mantine Settings</Drawer.Title>
             <Drawer.CloseButton color="violet" />
           </Drawer.Header>

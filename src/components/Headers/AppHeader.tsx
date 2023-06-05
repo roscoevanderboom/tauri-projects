@@ -1,6 +1,6 @@
 import { createStyles, Header, Group, Burger, rem } from "@mantine/core";
 import { useAppContext } from "@/App";
-import ThemeColorToggle from "../Buttons/ThemeColorToggle";
+import SettingsModel from "../Modals/SettingsModal";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -28,7 +28,7 @@ export default function AppHeader() {
         </Group>
 
         <Group>
-          <ThemeColorToggle />
+          <SettingsModel />
         </Group>
       </div>
     </Header>
