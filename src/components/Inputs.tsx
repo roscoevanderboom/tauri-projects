@@ -13,7 +13,7 @@ export function FindAndReplace() {
     if (originalFiles.length !== 0) {
       const updatedArray = originalFiles.map((str) => {
         let { dir, name, ext } = formatFilenames(str);
-        let newName = name.split(find).join(replace);
+        let newName = name.split(find).join(replace).trim();
         return joinStrings(dir, newName, ext);
       });
       dispatch(reducer_types.SET_ALTERED_FILES, updatedArray);
@@ -48,7 +48,7 @@ export function AddToFilename() {
     if (originalFiles.length !== 0) {
       const updatedArray = originalFiles.map((str) => {
         let { dir, name, ext } = formatFilenames(str);
-        let newName = prefix.concat(name, suffix);
+        let newName = prefix.concat(name, suffix).trim();
         return joinStrings(dir, newName, ext);
       });
       dispatch(reducer_types.SET_ALTERED_FILES, updatedArray);
