@@ -2,7 +2,7 @@
 
 import tweets from "@/tweets";
 import { Box, Button, Container, Stack, TextInput } from "@mantine/core";
-import { invoke } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/tauri";
 import { useState } from "react";
 
 export default function Home() {
